@@ -2,7 +2,6 @@
 'use strict';
 const Sequelize = require('sequelize');
 const dotenv = require('dotenv');
-
 dotenv.config();
 
 const sequelize = new Sequelize(
@@ -30,8 +29,7 @@ db.Sequelize = Sequelize;
 db.user = require('./user')(sequelize, Sequelize.DataTypes);
 db.projet = require('./projet')(sequelize, Sequelize.DataTypes);
 db.tache = require('./tache')(sequelize, Sequelize.DataTypes);
-db.membre = require('./membre')(sequelize, Sequelize.DataTypes);
 db.etatTache = require('./etatTache')(sequelize, Sequelize.DataTypes);
-
+db.membre = require('./membre')(sequelize, Sequelize.DataTypes);
 
 module.exports = db;
