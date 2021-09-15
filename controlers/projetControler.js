@@ -1,15 +1,18 @@
 var { status } = require('../utils/status');
 const db = require('../models/index');
-const pagination = require('../utils/pagination');
+const { pagination } = require('../utils/pagination');
 const { Op } = require('sequelize');
+const { jwtdecode } = require('../utils/jwtData');
 
 const getProjets = async (req, res) => {
     try {
+        const token = req.headers.authorization;
+        const { id } = jwtdecode(token.split(' ')[1]);
         const { page, size } = req.query;
         const { limit, offset } = pagination(page, size);
         const rows = await db.projet.findAll(
             {
-                // where: {},
+                where: { idUser: id },
                 limit,
                 offset,
                 // include:[]
@@ -24,7 +27,7 @@ const getProjets = async (req, res) => {
 const getProjet = async (req, res) => {
     try {
         const { id } = req.params;
-        const rows = await db.projet.findOne({ id });
+        const rows = await db.projet.findOne({ where: { id } });
         if (!rows) {
             res.status(status.notfound).send('Not found projet with this id');
         }
@@ -36,6 +39,8 @@ const getProjet = async (req, res) => {
 
 const createProjet = async (req, res) => {
     try {
+        const token = req.headers.authorization;
+        const { id } = jwtdecode(token.split(' ')[1]);
         const { libelle, description } = req.body;
         if (!(libelle && description)) {
             res.status(status.bad).send("All input is required");
@@ -44,7 +49,8 @@ const createProjet = async (req, res) => {
             libelle,
             description,
             dateCreation: new Date(),
-            dataFin: null
+            dataFin: null,
+            idUser: id
         }
         const rows = await db.projet.create(values);
         res.status(status.created).send(rows);
@@ -60,7 +66,7 @@ const updateProjet = async (req, res) => {
 const deleteProjet = async (req, res) => {
     try {
         const { id } = req.params;
-        const rows = await db.projet.destroy({ id });
+        const rows = await db.projet.destroy({ where: { id } });
         if (!rows) {
             res.status(status.notfound).send('Not found projet with this id');
         }

@@ -26,7 +26,8 @@ module.exports = (sequelize, DataTypes) => {
     libelle: DataTypes.STRING,
     description: DataTypes.TEXT,
     dateCreation: DataTypes.DATE,
-    dataFin: DataTypes.DATE
+    dataFin: DataTypes.DATE,
+    idUser: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Projet',
