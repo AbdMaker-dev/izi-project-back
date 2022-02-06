@@ -7,7 +7,7 @@ module.exports = {
             {
                 type: Sequelize.INTEGER,
                 references: {
-                    model: 'membre', // name of Target model
+                    model: 'user', // name of Target model
                     key: 'id', // key in Target model that we're referencing
                 }
             }

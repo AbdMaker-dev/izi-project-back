@@ -35,4 +35,41 @@ db.tache = require('./tache')(sequelize, Sequelize.DataTypes);
 db.etatTache = require('./etatTache')(sequelize, Sequelize.DataTypes);
 db.membre = require('./membre')(sequelize, Sequelize.DataTypes);
 
+
+db.projet.belongsTo(db.user, {
+    as: 'user',
+    foreignKey: {
+        name: 'idUser'
+    }
+});
+db.projet.hasMany(db.membre, {
+    as: 'membres',
+    foreignKey: {
+        name: 'idPojet'
+    }
+});
+db.projet.hasMany(db.tache, {
+    as: 'taches',
+    foreignKey: {
+        name: 'idProjet'
+    }
+});
+db.tache.belongsTo(db.etatTache, {
+    as: 'projet_etat',
+    foreignKey: {
+        name: 'idEtatTache'
+    }
+});
+db.tache.belongsTo(db.user, {
+    as: 'tache_user',
+    foreignKey: {
+        name: 'idMembre'
+    }
+});
+db.membre.belongsTo(db.user, {
+    as: 'membre',
+    foreignKey: {
+        name: 'idUser'
+    }
+});
 module.exports = db;

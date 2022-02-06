@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       models.Tache.belongsTo(models.Projet);
       models.Tache.belongsTo(models.EtatTache);
-      models.Tache.belongsTo(models.Membre);
+      models.Tache.belongsTo(models.User);
     }
   };
   Tache.init({

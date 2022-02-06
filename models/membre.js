@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class Membre extends Model {
     static associate(models) {
       // define association here
-      models.Membre.hasMany(models.Tache);
+      // models.Membre.hasMany(models.Tache);
       models.Membre.belongsTo(models.Projet);
       models.Membre.belongsTo(models.User);
     }
