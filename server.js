@@ -1,8 +1,8 @@
 const app = require('./app');
 const userRoute = require('./routes/userRoute');
 const projetRouter = require('./routes/projetRoute');
-const { getCityWithLatAndLong } = require('./utils/city');
-const NodeGeocoder = require('node-geocoder');
+// const { getCityWithLatAndLong } = require('./utils/city');
+// const NodeGeocoder = require('node-geocoder');
 
 const options = {
     provider: 'google',
@@ -10,13 +10,13 @@ const options = {
     formatter: null
 };
 
-const geocoder = NodeGeocoder(options);
+// const geocoder = NodeGeocoder(options);
 
-geocoder.reverse({ lat: 14.786368, lon: -17.311941 }).then((result) => {
-    console.log('====================================');
-    console.log(result[0].city);
-    console.log('====================================');
-});
+// geocoder.reverse({ lat: 14.786368, lon: -17.311941 }).then((result) => {
+//     console.log('====================================');
+//     console.log(result[0].city);
+//     console.log('====================================');
+// });
 
 // getCityWithLatAndLong("14.786368", "-17.311941");
 
